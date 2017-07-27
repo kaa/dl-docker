@@ -230,9 +230,9 @@ RUN luarocks install nn && \
 RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
 	git clone --depth 1 https://github.com/opencv/opencv_contrib.git /root/opencv_contrib && \
 	cd /root/opencv_contrib && \
-	git checkout 3.2.0 && \
+	git checkout 86342522b0eb2b16fa851c020cc4e0fef4e010b7 && \
 	cd /root/opencv && \
-	git checkout 3.2.0 && \
+	git checkout 70bbf17b133496bd7d54d034b0f94bd869e0e810 && \
 	mkdir build && \
 	cd build && \
 	cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs/ -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules .. && \
