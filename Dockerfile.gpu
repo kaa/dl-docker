@@ -227,7 +227,7 @@ RUN luarocks install nn && \
 	luarocks make
 
 # Install OpenCV
-RUN apt-get install liblapacke-dev
+RUN apt-get install -y liblapacke-dev
 RUN git clone https://github.com/opencv/opencv.git /root/opencv && \
 	git clone https://github.com/opencv/opencv_contrib.git /root/opencv_contrib && \
 	cd /root/opencv_contrib && \
