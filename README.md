@@ -141,5 +141,15 @@ You can do one of:
 
 2. You can log in to a container and install the frameworks interactively using the terminal. After you've made sure everything looks good, you can commit the new contains and store it as an image
 
-### What operating systems are supported?
-Docker is supported on all the OSes mentioned here: [Install Docker Engine](https://docs.docker.com/engine/installation/) (i.e. different flavors of Linux, Windows and OS X). The CPU version (Dockerfile.cpu) will run on all the above operating systems. However, the GPU version (Dockerfile.gpu) will only run on Linux OS. This is because Docker runs inside a virtual machine on Windows and OS X. Virtual machines don't have direct access to the GPU on the host. Unless PCI passthrough is implemented for these hosts, GPU support isn't available on non-Linux OSes at the moment.
+### How to start docker with GPU and Webcam
+```bash
+xhost +
+
+GPU=1 nvidia-docker run --privileged -it -p 18888:8888 -p 16006:6006 -v /dev/video0:/dev/video0 --env="QT_X11_NO_MITSHM=1" --env DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v /home/oem/Bob/shared:/root/sharedfolder floydhub/dl-docker:gpu bash
+```
+
+### How to start jupyter in docker
+```bash
+sh /root/run_jupyter.sh --alow-root
+```
+Then access it on http://localhost:18888/
