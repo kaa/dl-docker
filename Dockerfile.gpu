@@ -255,7 +255,7 @@ RUN python3 -m ipykernel install --user
 
 # Install YOLO
 RUN git clone https://github.com/pjreddie/darknet.git /root/darknet
-COPY Makrfile /root/darknet
+COPY Makefile /root/darknet
 RUN cd /root/darknet && \
 	make
 
