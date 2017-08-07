@@ -53,12 +53,12 @@ cd dl-docker
 
 **CPU Version**
 ```bash
-docker build -t floydhub/dl-docker:cpu -f Dockerfile.cpu .
+docker build -t teamsoo/dl-docker:cpu -f Dockerfile.cpu .
 ```
 
 **GPU Version**
 ```bash
-docker build -t floydhub/dl-docker:gpu -f Dockerfile.gpu .
+docker build -t teamsoo/dl-docker:gpu -f Dockerfile.gpu .
 ```
 This will build a Docker image named `dl-docker` and tagged either `cpu` or `gpu` depending on the tag your specify. Also note that the appropriate `Dockerfile.<architecture>` has to be used.
 
@@ -67,12 +67,12 @@ Once we've built the image, we have all the frameworks we need installed in it. 
 
 **CPU Version**
 ```bash
-docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder floydhub/dl-docker:cpu bash
+docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder teamsoo/dl-docker:cpu bash
 ```
 	
 **GPU Version**
 ```bash
-nvidia-docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder floydhub/dl-docker:gpu bash
+nvidia-docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder teamsoo/dl-docker:gpu bash
 ```
 Note the use of `nvidia-docker` rather than just `docker`
 
@@ -145,7 +145,7 @@ You can do one of:
 ```bash
 xhost +
 
-GPU=1 nvidia-docker run --privileged -it -p 18888:8888 -p 16006:6006 -v /dev/video0:/dev/video0 --env="QT_X11_NO_MITSHM=1" --env DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v /home/oem/Bob/shared:/root/sharedfolder floydhub/dl-docker:gpu bash
+GPU=1 nvidia-docker run --privileged -it -p 18888:8888 -p 16006:6006 -v /dev/video0:/dev/video0 --env="QT_X11_NO_MITSHM=1" --env DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v /home/oem/Bob/shared:/root/sharedfolder teamsoo/dl-docker:gpu bash
 ```
 
 ### How to start jupyter in docker
