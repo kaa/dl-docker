@@ -230,17 +230,14 @@ RUN luarocks install nn && \
 RUN apt-get install -y liblapacke-dev
 RUN git clone https://github.com/opencv/opencv.git /root/opencv && \
 	git clone https://github.com/opencv/opencv_contrib.git /root/opencv_contrib && \
-	cd /root/opencv_contrib && \
-	git checkout 3.2.0 && \
 	cd /root/opencv && \
-	git checkout 3.2.0 && \
-	mkdir build
-	# cd build && \
-	# cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs/ -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules .. && \
-	# make -j"$(nproc)"  && \
-	# make install && \
-	# ldconfig && \
-	# echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
+	mkdir build && \
+	cd build && \
+	cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs/ -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules .. && \
+	make -j"$(nproc)"  && \
+	make install && \
+	ldconfig && \
+	echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
 
 # Set up notebook config
 COPY jupyter_notebook_config.py /root/.jupyter/
