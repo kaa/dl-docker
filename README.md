@@ -49,12 +49,12 @@ Once we've built the image, we have all the frameworks we need installed in it. 
 
 **CPU Version**
 ```bash
-docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder teamsoo/dl-docker:cpu bash
+docker run -it --name dl-docker -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder teamsoo/dl-docker:cpu bash
 ```
 	
 **GPU Version**
 ```bash
-nvidia-docker run -it -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder teamsoo/dl-docker:gpu bash
+nvidia-docker run -it --name dl-docker -p 8888:8888 -p 6006:6006 -v /sharedfolder:/root/sharedfolder teamsoo/dl-docker:gpu bash
 ```
 Note the use of `nvidia-docker` rather than just `docker`
 
@@ -117,11 +117,15 @@ You can do one of:
 ```bash
 xhost +
 
-GPU=1 nvidia-docker run --privileged -it -p 18888:8888 -p 16006:6006 -v /dev/video0:/dev/video0 --env="QT_X11_NO_MITSHM=1" --env DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v /home/oem/Bob/shared:/root/sharedfolder teamsoo/dl-docker:gpu bash
+GPU=1 nvidia-docker run --privileged -it --name dl-docker -p 18888:8888 -p 16006:6006 -v /dev/video0:/dev/video0 --env="QT_X11_NO_MITSHM=1" --env DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v /home/oem/Bob/shared:/root/sharedfolder teamsoo/dl-docker:gpu bash
 ```
 
 ### How to start jupyter in docker
 ```bash
-sh /root/run_jupyter.sh --alow-root
+sh /root/run_jupyter.sh --allow-root
+```
+Or this command to disable token
+```bash
+sh /root/run_jupyter.sh --allow-root --NotebookApp.token=''
 ```
 Then access it on http://localhost:18888/
